@@ -139,13 +139,12 @@ async def hello(client, message):
 async def setvar(client, message):
     user_id = client.me.id
     crot = await message.reply("`Processing...`")
-    cok = get_arg(message)
-    if not cok:
-      return await crot.edit("`Give Variable and Value to set!`")
-    else:
+    if cok := get_arg(message):
         biji = cok.split(" ", 1)
         await set_custom_var(user_id, var=biji[0], value=biji[1])
         await crot.edit(f"**Successfully Added Custom Var** \n\n**Var:** `{biji[0]}` \n**Val:** `{biji[1]}`")
+    else:
+        return await crot.edit("`Give Variable and Value to set!`")
 
 """
 @nay(["pak"], CMD_HNDLR)

@@ -72,9 +72,9 @@ async def salamarab(client: Client, message: Message):
 add_command_help(
     "salam",
     [
-        [f"p", "Assalamualaikum."],
-        [f"pe", "Assalamualaikum Warahmatullahi Wabarakatuh."],
-        [f"l", "Wa'alaikumsalam."],
-        [f"as", "Assalamualaikum Bahas arab."],
-    ]
+        ["p", "Assalamualaikum."],
+        ["pe", "Assalamualaikum Warahmatullahi Wabarakatuh."],
+        ["l", "Wa'alaikumsalam."],
+        ["as", "Assalamualaikum Bahas arab."],
+    ],
 )

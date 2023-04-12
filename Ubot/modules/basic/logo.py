@@ -24,7 +24,6 @@ from Ubot.core.lgs import *
 from . import *
 
 @Ubot(["logo2"], "")
-
 async def logo_gen(client, message):
 
     xx = await message.reply_text("`Mempersiapkan logo Anda...`")
@@ -151,7 +150,7 @@ async def logo_gen(client, message):
 
               stroke_width=strke, stroke_fill="black")
 
-    flnme = f"logo.png"
+    flnme = "logo.png"
 
     img.save(flnme, "png")
 
@@ -177,11 +176,8 @@ async def logo_gen(client, message):
 
         os.remove(bg_) 
 
-    if os.path.exists(font_):
-
-        if not font_.startswith("Ubot/resources/fonts"):
-
-            os.remove(font_)
+    if os.path.exists(font_) and not font_.startswith("Ubot/resources/fonts"):
+        os.remove(font_)
 
 
 
@@ -191,15 +187,9 @@ async def logo_command(client, message):
 
 
 add_command_help(
-
     "logo",
-
     [
-
-        [f"logo [kata]", "Buat Logo Secara Random."],
-
-        [f"logo2 [kata]", "Buat Logo Secara Random."],
-
+        ["logo [kata]", "Buat Logo Secara Random."],
+        ["logo2 [kata]", "Buat Logo Secara Random."],
     ],
-
 )

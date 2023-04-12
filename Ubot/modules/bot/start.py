@@ -80,15 +80,19 @@ async def start_(client: Client, message: Message):
         reply_markup=InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton(text="👮‍♂ Admin 1", url=f"https://t.me/kenapanan"),
-                    InlineKeyboardButton(text="👮‍♂ Admin 2", url=f"https://t.me/Rizzvbss"),
+                    InlineKeyboardButton(
+                        text="👮‍♂ Admin 1", url="https://t.me/kenapanan"
+                    ),
+                    InlineKeyboardButton(
+                        text="👮‍♂ Admin 2", url="https://t.me/Rizzvbss"
+                    ),
                 ],
-                  [
-                     InlineKeyboardButton(text="Tutup", callback_data="cl_ad"),
-                  ],
-             ]
+                [
+                    InlineKeyboardButton(text="Tutup", callback_data="cl_ad"),
+                ],
+            ]
         ),
-     disable_web_page_preview=True
+        disable_web_page_preview=True,
     )
     
         
@@ -127,17 +131,16 @@ async def restart_bot(_, message: Message):
         
 @Ubot("usage", "")
 async def usage_dynos(client, message):
-    if await is_heroku():
-        if HEROKU_API_KEY == "" and HEROKU_APP_NAME == "":
-            return await message.reply_text(
-                "<b>Menggunakan App Heroku!</b>\n\nMasukan/atur  `HEROKU_API_KEY` dan `HEROKU_APP_NAME` untuk bisa melakukan update!"
-            )
-        elif HEROKU_API_KEY == "" or HEROKU_APP_NAME == "":
-            return await message.reply_text(
-                "<b>Menggunakan App Heroku!</b>\n\n<b>pastikan</b> `HEROKU_API_KEY` **dan** `HEROKU_APP_NAME` <b>sudah di configurasi dengan benar!</b>"
-            )
-    else:
-            return await message.reply_text("Hanya untuk Heroku Deployment")
+    if not await is_heroku():
+        return await message.reply_text("Hanya untuk Heroku Deployment")
+    if HEROKU_API_KEY == "" and HEROKU_APP_NAME == "":
+        return await message.reply_text(
+            "<b>Menggunakan App Heroku!</b>\n\nMasukan/atur  `HEROKU_API_KEY` dan `HEROKU_APP_NAME` untuk bisa melakukan update!"
+        )
+    elif HEROKU_API_KEY == "" or HEROKU_APP_NAME == "":
+        return await message.reply_text(
+            "<b>Menggunakan App Heroku!</b>\n\n<b>pastikan</b> `HEROKU_API_KEY` **dan** `HEROKU_APP_NAME` <b>sudah di configurasi dengan benar!</b>"
+        )
     try:
         Heroku = heroku3.from_key(HEROKU_API_KEY)
         happ = Heroku.app(HEROKU_APP_NAME)
@@ -157,8 +160,8 @@ async def usage_dynos(client, message):
         "Authorization": f"Bearer {HEROKU_API_KEY}",
         "Accept": "application/vnd.heroku+json; version=3.account-quotas",
     }
-    path = "/accounts/" + account_id + "/actions/get-quota"
-    r = requests.get("https://api.heroku.com" + path, headers=headers)
+    path = f"/accounts/{account_id}/actions/get-quota"
+    r = requests.get(f"https://api.heroku.com{path}", headers=headers)
     if r.status_code != 200:
         return await dyno.edit("Unable to fetch.")
     result = r.json()
@@ -206,7 +209,7 @@ async def usereee(client, message):
 """
         except:
             pass
-    if int(len(str(user))) > 4096:
+    if len(str(user)) > 4096:
         with BytesIO(str.encode(str(user))) as out_file:
             out_file.name = "userbot.txt"
             await message.reply_document(
@@ -270,7 +273,7 @@ async def user(client, message):
 """
         except:
             pass
-    if int(len(str(user))) > 4096:
+    if len(str(user)) > 4096:
         with BytesIO(str.encode(str(user))) as out_file:
             out_file.name = "userbot.txt"
             await message.reply_document(

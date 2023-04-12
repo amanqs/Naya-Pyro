@@ -18,7 +18,7 @@ async def dm(c: Client, m: Message):
     inp = m.text.split(None, 2)[1]
     user = await c.get_chat(inp)
     spam_text = ' '.join(m.command[2:])
-    quantity = int(quantity)
+    quantity = quantity
 
     if m.reply_to_message:
         reply_to_id = m.reply_to_message.message_id
@@ -38,6 +38,9 @@ async def dm(c: Client, m: Message):
 add_command_help(
     "pm",
     [
-        [f"dm @username kata", "Untuk Mengirim Pesan Tanpa Harus Kedalam Roomchat.",],
+        [
+            "dm @username kata",
+            "Untuk Mengirim Pesan Tanpa Harus Kedalam Roomchat.",
+        ]
     ],
 )

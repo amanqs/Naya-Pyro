@@ -73,7 +73,7 @@ async def pytrans_tr(_, message: Message):
 add_command_help(
     "translate",
     [
-        [f"tr id [balas ke pesan]", "Menerjemahkan Bahasa lain ke Indonesia"],
-        [f"lang", "Untuk mengetahui kode bahasa"],
+        ["tr id [balas ke pesan]", "Menerjemahkan Bahasa lain ke Indonesia"],
+        ["lang", "Untuk mengetahui kode bahasa"],
     ],
 )

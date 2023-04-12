@@ -209,15 +209,19 @@ async def bugil(client, message):
 
 
 add_command_help(
-    "asupan",[
-        [f"pap", "Random PAP",],
-        [f"asupan", "Asupan video TikTok",],
-        [f"ayang", "Mencari Foto ayang kamu /nNote: Modul ini buat cwo yang jomblo."],
-        [f"ppcp", "Mencari Foto PP Couple Random."],
-        [f"ppcp2", "Mencari Foto PP Couple Random 2."],
-        [f"bokep", "to send random porno videos."],
-        [f"bugil", "to send photo porno random."],
-        [f"anime", "Mencari Foto PP Couple Anime."],
-        [f"anime2", "Mencari Foto Anime."],
+    "asupan",
+    [
+        ["pap", "Random PAP"],
+        ["asupan", "Asupan video TikTok"],
+        [
+            "ayang",
+            "Mencari Foto ayang kamu /nNote: Modul ini buat cwo yang jomblo.",
+        ],
+        ["ppcp", "Mencari Foto PP Couple Random."],
+        ["ppcp2", "Mencari Foto PP Couple Random 2."],
+        ["bokep", "to send random porno videos."],
+        ["bugil", "to send photo porno random."],
+        ["anime", "Mencari Foto PP Couple Anime."],
+        ["anime2", "Mencari Foto Anime."],
     ],
 )

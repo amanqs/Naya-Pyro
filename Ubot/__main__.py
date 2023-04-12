@@ -36,7 +36,7 @@ async def main():
     await app.start()
     LOGGER("Naya Premium").info("Memulai Ubot Pyro..")
     for all_module in ALL_MODULES:
-        importlib.import_module("Ubot.modules" + all_module)
+        importlib.import_module(f"Ubot.modules{all_module}")
     for bot in bots:
         try:
             await bot.start()
@@ -54,7 +54,7 @@ async def main():
             ids.append(ex.id)
         except Exception as e:
             LOGGER("X").info(f"{e}")
-            
+
     await idle()
     await aiosession.close()
     await app.stop()

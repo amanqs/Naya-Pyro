@@ -53,17 +53,15 @@ async def module_help(client: Client, message: Message):
                 f"```{str(ac)}```",
                 reply_to_message_id=ReplyCheck(message),
             )
-            await xx.reply(
-                f"**Usage:** `help broadcast` **To View Module Information**"
-            )
+            await xx.reply("**Usage:** `help broadcast` **To View Module Information**")
             return
 
     if help_arg:
         if help_arg in CMD_HELP:
             commands: dict = CMD_HELP[help_arg]
-            this_command = f"**Bantuan {str(help_arg).upper()}**\n\n"
-            for x in commands:
-                this_command += f"๏ **Keterangan:** `{str(commands[x])}`\n\n"
+            this_command = f"**Bantuan {help_arg.upper()}**\n\n"
+            for value in commands.values():
+                this_command += f"๏ **Keterangan:** `{str(value)}`\n\n"
             this_command += "@KynanSupport"
             await edit_or_reply(
                 message, this_command, parse_mode=enums.ParseMode.MARKDOWN
@@ -76,11 +74,7 @@ async def module_help(client: Client, message: Message):
 
 
 def add_command_help(module_name, commands):
-    if module_name in CMD_HELP.keys():
-        command_dict = CMD_HELP[module_name]
-    else:
-        command_dict = {}
-
+    command_dict = CMD_HELP[module_name] if module_name in CMD_HELP.keys() else {}
     for x in commands:
         for y in x:
             if y is not x:

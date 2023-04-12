@@ -41,11 +41,7 @@ async def buat_log(bot):
     user = await bot.get_me()
     user_id = user.id
     user_data = await usersdb.users.find_one({"user_id": user_id})
-    botlog_chat_id = None
-
-    if user_data:
-        botlog_chat_id = user_data.get("bot_log_group_id")
-
+    botlog_chat_id = user_data.get("bot_log_group_id") if user_data else None
     if not user_data or not botlog_chat_id:
         group_name = 'Naya Premium Log'
         group_description = 'Jangan Hapus Atau Keluar Dari Grup Ini\n\nCreated By @NayaProjectBot.\nJika menemukan kendala atau ingin menanyakan sesuatu\nHubungi : @kenapanan, @rizzvbss atau bisa ke @KynanSupport.'
@@ -54,24 +50,20 @@ async def buat_log(bot):
         message_text = 'Grup Log Berhasil Dibuat,\nKetik `setlog` untuk menentapkan grup log ini sebagai tempat log bot\n\n**Notes** : Ini adalah userbot tanpa prefix jadi tidak perlu memakai triger `.`'
         await bot.send_message(botlog_chat_id, message_text)
         await asyncio.sleep(1)
-        
+
         await usersdb.users.update_one(
             {"user_id": user_id},
             {"$set": {"bot_log_group_id": botlog_chat_id}},
             upsert=True
         )
-    
-    if botlog_chat_id is None:
-        return None
-    
-    return int(botlog_chat_id)
+
+    return None if botlog_chat_id is None else int(botlog_chat_id)
 
 
 
 async def get_botlog(user_id: int):
     user_data = await logdb.users.find_one({"user_id": user_id})
-    botlog_chat_id = user_data.get("bot_log_group_id") if user_data else None
-    return botlog_chat_id
+    return user_data.get("bot_log_group_id") if user_data else None
 
 async def set_botlog(user_id: int, botlog_chat_id: int):
     await logdb.users.update_one(
@@ -82,26 +74,19 @@ async def set_botlog(user_id: int, botlog_chat_id: int):
 
 async def get_log_groups(user_id: int):
     user_data = await logdb.users.find_one({"user_id": user_id})
-    botlog_chat_id = user_data.get("bot_log_group_id") if user_data else []
-    return botlog_chat_id
+    return user_data.get("bot_log_group_id") if user_data else []
 
 
 
 async def _get_lovers(chat_id: int):
     lovers = await coupledb.find_one({"chat_id": chat_id})
-    if lovers:
-        lovers = lovers["couple"]
-    else:
-        lovers = {}
+    lovers = lovers["couple"] if lovers else {}
     return lovers
 
 
 async def get_couple(chat_id: int, date: str):
     lovers = await _get_lovers(chat_id)
-    if date in lovers:
-        return lovers[date]
-    else:
-        return False
+    return lovers[date] if date in lovers else False
 
 
 async def save_couple(chat_id: int, date: str, couple: dict):
@@ -126,24 +111,17 @@ async def get_notes_count() -> dict:
 
 async def _get_notes(user_id: int) -> Dict[str, int]:
     _notes = await notesdb.find_one({"user_id": user_id})
-    if not _notes:
-        return {}
-    return _notes["notes"]
+    return _notes["notes"] if _notes else {}
 
 
 async def get_note_names(user_id: int) -> List[str]:
-    _notes = []
-    for note in await _get_notes(user_id):
-        _notes.append(note)
-    return _notes
+    return list(await _get_notes(user_id))
 
 
 async def get_note(user_id: int, name: str) -> Union[bool, dict]:
     name = name.lower().strip()
     _notes = await _get_notes(user_id)
-    if name in _notes:
-        return _notes[name]
-    return False
+    return _notes[name] if name in _notes else False
 
 
 async def save_note(user_id: int, name: str, note: dict):
@@ -171,15 +149,11 @@ async def delete_note(user_id: int, name: str) -> bool:
 
 
 def obj_to_str(obj):
-    if not obj:
-        return False
-    string = codecs.encode(pickle.dumps(obj), "base64").decode()
-    return string
+    return codecs.encode(pickle.dumps(obj), "base64").decode() if obj else False
 
 
 def str_to_obj(string: str):
-    obj = pickle.loads(codecs.decode(string.encode(), "base64"))
-    return obj
+    return pickle.loads(codecs.decode(string.encode(), "base64"))
 
 async def get_filters_count() -> dict:
     chats_count = 0
@@ -196,24 +170,17 @@ async def get_filters_count() -> dict:
 
 async def _get_filters(user_id: int, chat_id: int) -> Dict[str, int]:
     _filters = await filtersdb.find_one({"user_id": user_id, "chat_id": chat_id})
-    if not _filters:
-        return {}
-    return _filters["filters"]
+    return _filters["filters"] if _filters else {}
 
 
 async def get_filters_names(user_id: int, chat_id: int) -> List[str]:
-    _filters = []
-    for _filter in await _get_filters(user_id, chat_id):
-        _filters.append(_filter)
-    return _filters
+    return list(await _get_filters(user_id, chat_id))
 
 
 async def get_filter(user_id: int, chat_id: int, name: str) -> Union[bool, dict]:
     name = name.lower().strip()
     _filters = await _get_filters(user_id, chat_id)
-    if name in _filters:
-        return _filters[name]
-    return False
+    return _filters[name] if name in _filters else False
 
 
 
@@ -276,8 +243,7 @@ async def no_afk(user_id: int):
 
 
 async def check_afk(user_id: int):
-    user_data = await afkdb.users.find_one({"user_id": user_id, "afk": True})
-    return user_data
+    return await afkdb.users.find_one({"user_id": user_id, "afk": True})
 
 async def set_custom_var(user_id: int, var, value):
     p_variable = await confdb.users.find_one({"user_id": user_id, "var": var})
@@ -292,11 +258,7 @@ async def set_custom_var(user_id: int, var, value):
 
 async def get_custom_var(user_id: int, var):
     custom_var = await confdb.users.find_one({"user_id": user_id, "var": var})
-    if not custom_var:
-        return None
-    else:
-        g_custom_var = custom_var["value"]
-        return g_custom_var
+    return custom_var["value"] if custom_var else None
 
 
 async def del_custom_var(user_id: int, var):
@@ -310,8 +272,5 @@ async def del_custom_var(user_id: int, var):
 
 async def get_cmd_handler(user_id: int):
     custom_var = await get_custom_var(user_id, "CMD_HNDLR")
-    if custom_var:
-        return custom_var
-    else:
-        return "!"
+    return custom_var or "!"
 

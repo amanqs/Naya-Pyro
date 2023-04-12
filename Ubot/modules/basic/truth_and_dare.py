@@ -75,20 +75,20 @@ async def truth(client, message):
 add_command_help(
     "tod",
     [
-        [f"dare", "Coba sendiri"],
-        [f"truth", "Coba sendiri"],
-        [f"apakah [pertanyaan]", "Coba sendiri"],
-        [f"kenapa [pertanyaan]", "Coba sendiri"],
-        [f"bagaimana [pertanyaan]", "Coba sendiri"],
+        ["dare", "Coba sendiri"],
+        ["truth", "Coba sendiri"],
+        ["apakah [pertanyaan]", "Coba sendiri"],
+        ["kenapa [pertanyaan]", "Coba sendiri"],
+        ["bagaimana [pertanyaan]", "Coba sendiri"],
     ],
 )
 
 add_command_help(
     "nanya",
     [
-        [f"apakah [pertanyaan]", "Coba sendiri"],
-        [f"kenapa [pertanyaan]", "Coba sendiri"],
-        [f"bagaimana [pertanyaan]", "Coba sendiri"],
+        ["apakah [pertanyaan]", "Coba sendiri"],
+        ["kenapa [pertanyaan]", "Coba sendiri"],
+        ["bagaimana [pertanyaan]", "Coba sendiri"],
     ],
 )
         

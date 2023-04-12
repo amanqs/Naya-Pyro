@@ -54,9 +54,9 @@ async def remove_notes(client, message):
     user_id = message.from_user.id
     deleted = await delete_note(user_id, name)
     if deleted:
-        await message.reply("**Berhasil Menghapus Catatan:** `{}`".format(name))
+        await message.reply(f"**Berhasil Menghapus Catatan:** `{name}`")
     else:
-        await message.reply("**Tidak dapat menemukan catatan:** `{}`".format(name))
+        await message.reply(f"**Tidak dapat menemukan catatan:** `{name}`")
 
 
 @Ubot("notes", "")
@@ -75,13 +75,12 @@ async def get_notes(client, message):
 add_command_help(
     "notes",
     [
-        [f" save [text/reply]",
-            "Simpan pesan ke Group. (bisa menggunakan stiker)"],
-        [f" get [nama]",
-            "Ambil catatan ke tersimpan"],
-        [f" notes",
-            "Lihat Daftar Catatan"],
-        [f" rm [nama]",
-            "Menghapus nama catatan"],
+        [
+            " save [text/reply]",
+            "Simpan pesan ke Group. (bisa menggunakan stiker)",
+        ],
+        [" get [nama]", "Ambil catatan ke tersimpan"],
+        [" notes", "Lihat Daftar Catatan"],
+        [" rm [nama]", "Menghapus nama catatan"],
     ],
 )

@@ -13,8 +13,7 @@ from . import *
 
 @Ubot(["del"], "")
 async def del_msg(client: Client, message: Message):
-    msg_src = message.reply_to_message
-    if msg_src:
+    if msg_src := message.reply_to_message:
         if msg_src.from_user.id:
             try:
                 await client.delete_messages(message.chat.id, msg_src.id)
@@ -29,8 +28,7 @@ async def del_msg(client: Client, message: Message):
 @Ubot(["purge"], "")
 async def purge(client: Client, message: Message):
     ex = await message.edit_text("`Starting To Purge Messages!`")
-    msg = message.reply_to_message
-    if msg:
+    if msg := message.reply_to_message:
         itermsg = list(range(msg.id, message.id))
     else:
         await ex.edit("`Reply To Message To Purge!`")
@@ -92,8 +90,8 @@ async def purgeme(client: Client, message: Message):
 add_command_help(
     "purge",
     [
-        [f"del", "to delete someone's message."],
-        [f"purge", "reply to all messages from your replied."],
-        [f"purgeme [count]", "to delete your messages only."],
+        ["del", "to delete someone's message."],
+        ["purge", "reply to all messages from your replied."],
+        ["purgeme [count]", "to delete your messages only."],
     ],
 )

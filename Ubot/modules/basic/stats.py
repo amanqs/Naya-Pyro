@@ -55,9 +55,4 @@ async def stats(client: Client, message: Message):
     )
 
 
-add_command_help(
-    "stats",
-    [
-        [f"stats", "Mengambil info akun anda."],
-    ],
-)
+add_command_help("stats", [["stats", "Mengambil info akun anda."]])

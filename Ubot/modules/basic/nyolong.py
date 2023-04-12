@@ -38,9 +38,4 @@ async def copy_msg(client: Client, message: Message):
 
 
 
-add_command_help(
-    "nyolong",
-    [
-        [f"curi", "nyolong konten orang"],
-    ],
-)
+add_command_help("nyolong", [["curi", "nyolong konten orang"]])

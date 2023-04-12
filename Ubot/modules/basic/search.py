@@ -71,8 +71,9 @@ async def gif_cmd(client, message):
 
 
 add_command_help(
-    "search",[
-        [f"gif <query>", "Membuat mencari gif."],
-        [f"pic <query>", "Mencari gambar."],
+    "search",
+    [
+        ["gif <query>", "Membuat mencari gif."],
+        ["pic <query>", "Mencari gambar."],
     ],
 )

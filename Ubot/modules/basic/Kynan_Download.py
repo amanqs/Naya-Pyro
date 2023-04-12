@@ -46,7 +46,7 @@ async def yt_video(client, message):
             "geo_bypass": True,
         }
     )
-    await infomsg.edit(f"<b>📥 Downloader...</b>")
+    await infomsg.edit("<b>📥 Downloader...</b>")
     try:
         ytdl_data = await run_sync(ydl.extract_info, link, download=True)
         file_path = ydl.prepare_filename(ytdl_data)
@@ -67,15 +67,7 @@ async def yt_video(client, message):
         file_name=title,
         duration=duration,
         supports_streaming=True,
-        caption="<b>💡 Informasi {}</b>\n\n<b>🏷 Nama:</b> {}\n<b>🧭 Durasi:</b> {}\n<b>👀 Dilihat:</b> {}\n<b>📢 Channel:</b> {}\n<b>🔗 Tautan:</b> <a href={}>Youtube</a>\n\n<b>⚡ Powered By:</b> {}".format(
-            "video",
-            title,
-            duration,
-            views,
-            channel,
-            url,
-            app.me.mention,
-        ),
+        caption=f'<b>💡 Informasi {"video"}</b>\n\n<b>🏷 Nama:</b> {title}\n<b>🧭 Durasi:</b> {duration}\n<b>👀 Dilihat:</b> {views}\n<b>📢 Channel:</b> {channel}\n<b>🔗 Tautan:</b> <a href={url}>Youtube</a>\n\n<b>⚡ Powered By:</b> {app.me.mention}',
         reply_to_message_id=message.id,
     )
     await infomsg.delete()
@@ -106,7 +98,7 @@ async def yt_audio(client, message):
             "geo_bypass": True,
         }
     )
-    await infomsg.edit(f"<b>📥 Downloader...</b>")
+    await infomsg.edit("<b>📥 Downloader...</b>")
     try:
         ytdl_data = await run_sync(ydl.extract_info, link, download=True)
         file_path = ydl.prepare_filename(ytdl_data)
@@ -126,15 +118,7 @@ async def yt_audio(client, message):
         thumb=thumbnail,
         file_name=title,
         duration=duration,
-        caption="<b>💡 Informasi {}</b>\n\n<b>🏷 Nama:</b> {}\n<b>🧭 Durasi:</b> {}\n<b>👀 Dilihat:</b> {}\n<b>📢 Channel:</b> {}\n<b>🔗 Tautan:</b> <a href={}>Youtube</a>\n\n<b>⚡ Powered By:</b> {}".format(
-            "Audio",
-            title,
-            duration,
-            views,
-            channel,
-            url,
-            app.me.mention,
-        ),
+        caption=f'<b>💡 Informasi {"Audio"}</b>\n\n<b>🏷 Nama:</b> {title}\n<b>🧭 Durasi:</b> {duration}\n<b>👀 Dilihat:</b> {views}\n<b>📢 Channel:</b> {channel}\n<b>🔗 Tautan:</b> <a href={url}>Youtube</a>\n\n<b>⚡ Powered By:</b> {app.me.mention}',
         reply_to_message_id=message.id,
     )
     await infomsg.delete()
