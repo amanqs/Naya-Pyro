@@ -66,7 +66,7 @@ async def voicelang(client: Client, message: Message):
         lang = temp
         return
     await edit_or_reply(
-        message, "**Bahasa untuk Voice Google diganti menjadi** `{}`".format(lang)
+        message, f"**Bahasa untuk Voice Google diganti menjadi** `{lang}`"
     )
 
 @Ubot(["stt"], "")
@@ -105,10 +105,13 @@ async def speech_to_text(client, message):
 add_command_help(
     "voice",
     [
-        [f"tts [reply]", "Ubah teks menjadi suara oleh google."],
-        [f"stt [reply]", "ubah Voice Note menjadi text (default bahasa : Indonesia)."],
+        ["tts [reply]", "Ubah teks menjadi suara oleh google."],
         [
-            f"lang (lang_id) ",
+            "stt [reply]",
+            "ubah Voice Note menjadi text (default bahasa : Indonesia).",
+        ],
+        [
+            "lang (lang_id) ",
             "Setel bahasa suara anda\n\nBeberapa Bahasa Suara yang Tersedia:"
             "\nID| Language  | ID| Language\n"
             "af: Afrikaans | ar: Arabic\n"

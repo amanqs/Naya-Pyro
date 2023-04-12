@@ -23,10 +23,7 @@ onlinestr ="""
 async def is_afk_(f, client, message):
     user_id = client.me.id
     af_k_c = await check_afk(user_id)
-    if af_k_c:
-        return bool(True)
-    else:
-        return bool(False)
+    return bool(af_k_c)
     
 is_afk = filters.create(func=is_afk_, name="is_afk_")
 
@@ -109,10 +106,4 @@ async def no_afke(client, message):
     await no_afk(user_id)
     await client.send_message(botlog, onlinestr.format(total_afk_time))
 
-add_command_help(
-    "afk",
-    [
-        [f"afk","Mengaktifkan mode afk.",
-        ],
-    ],
-)
+add_command_help("afk", [["afk", "Mengaktifkan mode afk."]])

@@ -91,8 +91,7 @@ async def filters_re(client, message):
             if data_type == "text":
                 keyb = None
                 if re.findall(r"\[.+\,.+\]", data):
-                    keyboard = extract_text_and_keyb(ikb, data)
-                    if keyboard:
+                    if keyboard := extract_text_and_keyb(ikb, data):
                         data, keyb = keyboard
 
                 if message.reply_to_message:
@@ -122,8 +121,11 @@ async def filters_re(client, message):
 add_command_help(
     "filter",
     [
-        [f"adfil <balas ke pesan atau sticker> <triger/nama filer>", "Save filters."],
-        [f"stfil <triger/nama filter>", "Menghapus filter."],
-        [f"filters", "Melihat list filter."],
+        [
+            "adfil <balas ke pesan atau sticker> <triger/nama filer>",
+            "Save filters.",
+        ],
+        ["stfil <triger/nama filter>", "Menghapus filter."],
+        ["filters", "Melihat list filter."],
     ],
 )

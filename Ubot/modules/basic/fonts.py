@@ -53,30 +53,29 @@ def gen_font(text, new_font):
 
 @Ubot(["font"], "")
 async def font_ubot(client, message):
-    if message.reply_to_message or get_arg(message):
-        font = get_arg(message)
-        text = message.reply_to_message.text
-        if not font:
-            return await message.reply(f"<code>{font} Tidak Ada Dalam Daftar Font...</code>")
-        if font == "smallcap":
-            nan = gen_font(text, _smallcap)
-        elif font == "monospace":
-            nan = gen_font(text, _monospace)
-        elif font == "outline":
-            nan = gen_font(text, _outline)
-        elif font == "script":
-            nan = gen_font(text, _script)
-        elif font == "blackbubbles":
-            nan = gen_font(text, _blackbubbles)
-        elif font == "bubbles":
-            nan = gen_font(text, _bubbles)
-        elif font == "bold":
-            nan = gen_font(text, _bold)
-        elif font == "bolditalic":
-            nan = gen_font(text, _bolditalic)
-        await message.reply(nan)
-    else:
+    if not message.reply_to_message and not get_arg(message):
         return await message.reply("Balas Teks Dan Isi Nama Font!!!")
+    font = get_arg(message)
+    text = message.reply_to_message.text
+    if not font:
+        return await message.reply(f"<code>{font} Tidak Ada Dalam Daftar Font...</code>")
+    if font == "smallcap":
+        nan = gen_font(text, _smallcap)
+    elif font == "monospace":
+        nan = gen_font(text, _monospace)
+    elif font == "outline":
+        nan = gen_font(text, _outline)
+    elif font == "script":
+        nan = gen_font(text, _script)
+    elif font == "blackbubbles":
+        nan = gen_font(text, _blackbubbles)
+    elif font == "bubbles":
+        nan = gen_font(text, _bubbles)
+    elif font == "bold":
+        nan = gen_font(text, _bold)
+    elif font == "bolditalic":
+        nan = gen_font(text, _bolditalic)
+    await message.reply(nan)
 
 
 @Ubot(["lf", "listfont"], "")
@@ -97,7 +96,7 @@ async def fonts(client, message):
 add_command_help(
     "fonts",
     [
-        [f"font [balas ke pesan]", "Membuat Text Dengan Gaya Font Berbeda"],
-        [f"lf", "Melihat Daftar Fonts."],
+        ["font [balas ke pesan]", "Membuat Text Dengan Gaya Font Berbeda"],
+        ["lf", "Melihat Daftar Fonts."],
     ],
 )

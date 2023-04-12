@@ -72,8 +72,14 @@ async def invite_link(client: Client, message: Message):
 add_command_help(
     "culik",
     [
-        [f"invitelink","mengambil link group private. [Memerlukan wewenang Admin]",],
-        [f"invite @username", "invite pengguna ke group."],
-        [f"inviteall @username", "menambah member group secara masal (akun anda mungkin akan terbatasi/limit)."],
+        [
+            "invitelink",
+            "mengambil link group private. [Memerlukan wewenang Admin]",
+        ],
+        ["invite @username", "invite pengguna ke group."],
+        [
+            "inviteall @username",
+            "menambah member group secara masal (akun anda mungkin akan terbatasi/limit).",
+        ],
     ],
 )

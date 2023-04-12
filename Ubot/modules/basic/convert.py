@@ -26,8 +26,7 @@ async def dl_pic(client, download):
     with open(path, "rb") as f:
         content = f.read()
     os.remove(path)
-    get_photo = BytesIO(content)
-    return get_photo
+    return BytesIO(content)
 
 async def run_cmd(cmd: str) -> Tuple[str, str, int, int]:
     args = shlex.split(cmd)
@@ -49,7 +48,7 @@ mod_name = os.path.basename(__file__)[:-3]
 async def extract_all_aud(client, message):
     replied_msg = message.reply_to_message
     babi = await message.reply("`Downloading Video . . .`")
-    ext_out_path = os.getcwd() + "/" + "downloads/py_extract/audios"
+    ext_out_path = f"{os.getcwd()}/downloads/py_extract/audios"
     if not replied_msg:
         await babi.edit("**Mohon Balas Ke Video**")
         return
@@ -101,20 +100,29 @@ async def epek(client, message):
             await message.reply(f"Silahkan isi sesuai {tau}")
     else:
         await Tm.edit(
-            f"Silahkan balas ke audio atau mp3, contoh : <code>!efek bengek</code> sambil balas ke audio atau mp3"
+            "Silahkan balas ke audio atau mp3, contoh : <code>!efek bengek</code> sambil balas ke audio atau mp3"
         )
         
 add_command_help(
     "convert",
     [
-        [f"toaudio <reply to file>", "Convert video to audio."],
-        [f"toanime <reply to foto>", "Convert foto ke anime menggunakan ai bot."],
-        [f"togif <reply to video>", "Convert video ke gif."],
-        [f"toimg <reply stiker>", "Convert stiker ke foto."],
-        [f"cartoon [reply to image]", "Ubah gambar menggunakan deepai api."],
-        [f"toonify [reply to image]", "Untuk mempercantik gambar menggunakan deepai api."],
-        [f"pcil [reply to image]", "Untuk membuat gambar hitam putih."],
-        [f"efek [reply to audio][bengek/robot/jedug/echo/fast]", "Untuk memberi efek pada audio."],
+        ["toaudio <reply to file>", "Convert video to audio."],
+        [
+            "toanime <reply to foto>",
+            "Convert foto ke anime menggunakan ai bot.",
+        ],
+        ["togif <reply to video>", "Convert video ke gif."],
+        ["toimg <reply stiker>", "Convert stiker ke foto."],
+        ["cartoon [reply to image]", "Ubah gambar menggunakan deepai api."],
+        [
+            "toonify [reply to image]",
+            "Untuk mempercantik gambar menggunakan deepai api.",
+        ],
+        ["pcil [reply to image]", "Untuk membuat gambar hitam putih."],
+        [
+            "efek [reply to audio][bengek/robot/jedug/echo/fast]",
+            "Untuk memberi efek pada audio.",
+        ],
     ],
 )
 

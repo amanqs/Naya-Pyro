@@ -82,9 +82,8 @@ async def rmbg_background(c: Client, m: Message):
     endpoint = "https://api.remove.bg/v1.0/removebg"
     payload = {"size": "auto"}
 
-    if api_key:
-       with open(temp_file, "rb") as image_file:
-          response = requests.post(endpoint, data=payload, headers={"X-Api-Key": api_key}, files={"image_file": image_file}, stream=True)
+    with open(temp_file, "rb") as image_file:
+       response = requests.post(endpoint, data=payload, headers={"X-Api-Key": api_key}, files={"image_file": image_file}, stream=True)
 
     with open("output.png", "wb") as out_file:
         shutil.copyfileobj(response.raw, out_file)
@@ -104,8 +103,8 @@ async def rmbg_background(c: Client, m: Message):
 add_command_help(
     "chatbot",
     [
-        [f"ai [pertanyaan]", "Chat Open AI."],
-        [f"img or photo [query]", "Untuk mengunduh gambar yang dicari."],
+        ["ai [pertanyaan]", "Chat Open AI."],
+        ["img or photo [query]", "Untuk mengunduh gambar yang dicari."],
     ],
 )
 
@@ -113,7 +112,7 @@ add_command_help(
 add_command_help(
     "image",
     [
-        [f"rmbg [reply photo]", "Untuk menghapus background pada gambar."],
-        [f"face [reply to image]", "Untuk memeriksa deteksi wajah."],
+        ["rmbg [reply photo]", "Untuk menghapus background pada gambar."],
+        ["face [reply to image]", "Untuk memeriksa deteksi wajah."],
     ],
 )

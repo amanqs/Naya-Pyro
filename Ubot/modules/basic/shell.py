@@ -19,7 +19,7 @@ from . import *
 async def shell(_, message: Message):
     if message.from_user.id not in ADMINS:
         return await message.edit("**Lu bukan ADMINS**")
-  
+
     if len(message.command) < 2:
         return await message.edit("<b>Specify the command in message text</b>")
     cmd_text = message.text.split(maxsplit=1)[1]
@@ -34,7 +34,7 @@ async def shell(_, message: Message):
     char = "#" if os.getuid() == 0 else "$"
     text = f"<b>{char}</b> <code>{cmd_text}</code>\n\n"
 
-    await message.edit(text + "<b>Running...</b>")
+    await message.edit(f"{text}<b>Running...</b>")
     try:
         start_time = perf_counter()
         stdout, stderr = cmd_obj.communicate(timeout=1800)

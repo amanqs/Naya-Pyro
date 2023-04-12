@@ -15,7 +15,8 @@ from ubotlibs.ubot.helper import edit_or_reply
 @Ubot(["buat"], "")
 async def create(client: Client, message: Message):
     if len(message.command) < 3:
-        return await message.reply(f"**buat gc => Untuk Membuat Grup, buat ch => Untuk Mebuat Channel**"
+        return await message.reply(
+            "**buat gc => Untuk Membuat Grup, buat ch => Untuk Mebuat Channel**"
         )
     group_type = message.command[1]
     split = message.command[2:]
@@ -40,9 +41,4 @@ async def create(client: Client, message: Message):
 
 
 
-add_command_help(
-    "buat",
-    [
-        [f"buat gc atau ch", "Membuat Channel atau Group"],
-    ],
-)
+add_command_help("buat", [["buat gc atau ch", "Membuat Channel atau Group"]])

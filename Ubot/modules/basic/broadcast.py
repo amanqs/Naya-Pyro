@@ -132,15 +132,16 @@ async def all_chats(client, message):
 add_command_help(
     "broadcast",
     [
-        [f"gcast [text/reply]",
-            "Broadcast pesan ke Group. (bisa menggunakan Media/Sticker)"],
-        [f"gucast [text/reply]",
-            "Broadcast pesan ke semua chat. (bisa menggunakan Media/Sticker)"],
-        [f"addbl [id group]",
-            "Menambahkan group ke dalam blacklilst gcast"],
-        [f"delbl [id group]",
-            "Menghapus group dari blacklist gcast"],
-        [f"blchat",
-            "Melihat Daftar Blacklist Chat"],
+        [
+            "gcast [text/reply]",
+            "Broadcast pesan ke Group. (bisa menggunakan Media/Sticker)",
+        ],
+        [
+            "gucast [text/reply]",
+            "Broadcast pesan ke semua chat. (bisa menggunakan Media/Sticker)",
+        ],
+        ["addbl [id group]", "Menambahkan group ke dalam blacklilst gcast"],
+        ["delbl [id group]", "Menghapus group dari blacklist gcast"],
+        ["blchat", "Melihat Daftar Blacklist Chat"],
     ],
 )

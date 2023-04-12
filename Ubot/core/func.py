@@ -22,7 +22,7 @@ interact_with_to_delete = []
 
 def text(message: types.Message) -> str:
     """Find text in `types.Message` object"""
-    return message.text if message.text else message.caption
+    return message.text or message.caption
 
 async def aexec(code, c, m):
     exec(
@@ -142,5 +142,4 @@ def parse_meta_comments(code: str) -> Dict[str, str]:
 
 async def rm_markdown(text: str):
     "Remove basic markdown syntax from a string"
-    rmed = re.sub("[*`_]", "", text)
-    return rmed
+    return re.sub("[*`_]", "", text)

@@ -44,7 +44,7 @@ async def uptotelegraph(client: Client, message: Message):
         await tex.edit(U_done)
         os.remove(m_d)
     elif message.reply_to_message.text:
-        page_title = get_text(message) if get_text(message) else client.me.first_name
+        page_title = get_text(message) or client.me.first_name
         page_text = message.reply_to_message.text
         page_text = page_text.replace("\n", "<br>")
         try:
@@ -56,12 +56,4 @@ async def uptotelegraph(client: Client, message: Message):
         await tex.edit(wow_graph)
 
 
-add_command_help(
-    "telegraph",
-    [
-        [
-            f"tm `or` tg",
-            "To upload on telegraph.",
-        ],
-    ],
-)
+add_command_help("telegraph", [["tm `or` tg", "To upload on telegraph."]])

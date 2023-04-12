@@ -36,9 +36,4 @@ async def adzan_shalat(client: Client, message: Message):
 """
     await message.reply(geezram)
 
-add_command_help(
-    "adzan",
-    [
-        [f"adzan <kota>", "Menampilkan Jadwal Shalat"],
-    ],
-)
+add_command_help("adzan", [["adzan <kota>", "Menampilkan Jadwal Shalat"]])

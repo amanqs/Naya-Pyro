@@ -57,7 +57,7 @@ async def get_chat_(client, chat_):
             return (await client.get_chat(int(chat_))).id
         except ValueError:
             chat_ = chat_.split("-100")[1]
-            chat_ = '-' + str(chat_)
+            chat_ = f'-{str(chat_)}'
             return int(chat_)
         
 async def playout_ended_handler(group_call, filename):
@@ -129,25 +129,7 @@ async def skip_m(client, message):
 async def play_m(client, message):
     group_call = GPC.get((message.chat.id, client.me.id))
     u_s = await message.edit_text("**Processing..**")
-    input_str = get_text(message)
-    if not input_str:
-        if not message.reply_to_message:
-            return await u_s.edit_text("**Berikan Judul Lagu/Balas Ke File Audio..**")
-        if not message.reply_to_message.audio:
-            return await u_s.edit_text("**Berikan Judul Lagu/Balas Ke File Audio..**")
-        audio = message.reply_to_message.audio
-        audio_original = await message.reply_to_message.download()
-        vid_title = audio.title or audio.file_name
-        uploade_r = message.reply_to_message.audio.performer or "Unknown Artist."
-        dura_ = message.reply_to_message.audio.duration
-        dur = datetime.timedelta(seconds=dura_)
-        raw_file_name = (
-            ''.join(random.choice(string.ascii_lowercase) for i in range(5))
-            + ".raw"
-        )
-
-        url = message.reply_to_message.link
-    else:
+    if input_str := get_text(message):
         search = SearchVideos(str(input_str), offset=1, mode="dict", max_results=1)
         rt = search.result()
         result_s = rt.get("search_result")
@@ -164,10 +146,27 @@ async def play_m(client, message):
         except BaseException as e:
            return await u_s.edit(f"**Error :** `{str(e)}**")
         raw_file_name = (
-            ''.join(random.choice(string.ascii_lowercase) for i in range(5))
+            ''.join(random.choice(string.ascii_lowercase) for _ in range(5))
             + ".raw"
         )
 
+    else:
+        if not message.reply_to_message:
+            return await u_s.edit_text("**Berikan Judul Lagu/Balas Ke File Audio..**")
+        if not message.reply_to_message.audio:
+            return await u_s.edit_text("**Berikan Judul Lagu/Balas Ke File Audio..**")
+        audio = message.reply_to_message.audio
+        audio_original = await message.reply_to_message.download()
+        vid_title = audio.title or audio.file_name
+        uploade_r = message.reply_to_message.audio.performer or "Unknown Artist."
+        dura_ = message.reply_to_message.audio.duration
+        dur = datetime.timedelta(seconds=dura_)
+        raw_file_name = (
+            ''.join(random.choice(string.ascii_lowercase) for _ in range(5))
+            + ".raw"
+        )
+
+        url = message.reply_to_message.link
     try:
         raw_file_name = await convert_to_raw(audio_original, raw_file_name)
     except BaseException as e:
@@ -233,7 +232,7 @@ def download_progress_hook(d, message, client, start):
         eta = d.get('_eta_str', "N/A")
         percent = d.get("_percent_str", "N/A")
         speed = d.get("_speed_str", "N/A")
-        to_edit = f"<b>🔄 Processing</b>"
+        to_edit = "<b>🔄 Processing</b>"
         threading.Thread(target=edit_msg, args=(client, message, to_edit)).start()
 
 @run_in_exc
@@ -308,11 +307,11 @@ async def leave_vc_test(client, message):
 add_command_help(
     "music",
     [
-        [f"play", "Play Musik & Video Dengan Judul Lagu."],
-        [f"skip", "Skip Lagu."],
-        [f"pause", "Pause Musik."],
-        [f"resume", "Resume Musik."],
-        [f"end", "Stop Musik."],
-        [f"playlist", "Play Playlist Musik."],
+        ["play", "Play Musik & Video Dengan Judul Lagu."],
+        ["skip", "Skip Lagu."],
+        ["pause", "Pause Musik."],
+        ["resume", "Resume Musik."],
+        ["end", "Stop Musik."],
+        ["playlist", "Play Playlist Musik."],
     ],
 )

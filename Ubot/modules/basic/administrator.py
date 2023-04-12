@@ -56,22 +56,18 @@ async def extract_user_and_reason(message, sender_chat=False):
     reason = None
     if message.reply_to_message:
         reply = message.reply_to_message
-        if not reply.from_user:
-            if (
+        if reply.from_user:
+            id_ = reply.from_user.id
+
+        elif (
                 reply.sender_chat
                 and reply.sender_chat != message.chat.id
                 and sender_chat
             ):
-                id_ = reply.sender_chat.id
-            else:
-                return None, None
+            id_ = reply.sender_chat.id
         else:
-            id_ = reply.from_user.id
-
-        if len(args) < 2:
-            reason = None
-        else:
-            reason = text.split(None, 1)[1]
+            return None, None
+        reason = None if len(args) < 2 else text.split(None, 1)[1]
         return id_, reason
 
     if len(args) == 2:
@@ -343,15 +339,15 @@ async def demote(client: Client, message: Message):
 add_command_help(
     "admin",
     [
-        [f"ban [reply/username/userid]", "Ban pengguna."],
-        [f"unban [reply/username/userid]", "Unban pengguna.",],
-        [f"kick [reply/username/userid]", "kick pengguna dari group."],
-        [f"promote `or` .fullpromote","Promote pengguna.",],
-        [f"demote", "Demote pengguna."],
-        [f"mute [reply/username/userid]","Mute pengguna.",],
-        [f"unmute [reply/username/userid]","Unmute someone.",],
-        [f"pin [reply]","to pin any message.",],
-        [f"unpin [reply]","To unpin any message.",],
-        [f"setgpic [reply ke image]","To set an group profile pic",],
+        ["ban [reply/username/userid]", "Ban pengguna."],
+        ["unban [reply/username/userid]", "Unban pengguna."],
+        ["kick [reply/username/userid]", "kick pengguna dari group."],
+        ["promote `or` .fullpromote", "Promote pengguna."],
+        ["demote", "Demote pengguna."],
+        ["mute [reply/username/userid]", "Mute pengguna."],
+        ["unmute [reply/username/userid]", "Unmute someone."],
+        ["pin [reply]", "to pin any message."],
+        ["unpin [reply]", "To unpin any message."],
+        ["setgpic [reply ke image]", "To set an group profile pic"],
     ],
 )

@@ -36,7 +36,7 @@ CAPTION_TEXT = """
 
 async def downloadsong(m, message, vid_id):
     try: 
-        m = await m.edit(text = f"📥 **Download**")
+        m = await m.edit(text="📥 **Download**")
         link =  YouTube(f"https://youtu.be/{vid_id}")
         title = link.title
         thumbloc = f"downloads/{title}.jpg"
@@ -45,7 +45,7 @@ async def downloadsong(m, message, vid_id):
         songlink = link.streams.filter(only_audio=True).first()
         down = songlink.download(output_path="downloads/")
         first, last = os.path.splitext(down)
-        song = first + '.mp3'
+        song = f'{first}.mp3'
         os.rename(down, song)
         m = await m.edit(text = """
 📤 **Upload Started**
@@ -60,7 +60,7 @@ async def downloadsong(m, message, vid_id):
             os.remove(thumbloc)
     except Exception as e:
         await m.edit(f"Terjadi kesalahan. ⚠️ \nAnda juga bisa mendapatkan bantuan dari @kynansupport.__\n\n{str(e)}")
-        
+
     except HTTPError as e:
        if e.status_code == 429:
            time.sleep(3)
@@ -69,26 +69,25 @@ async def downloadsong(m, message, vid_id):
            raise e
 
 async def downlodvideo(m, message, vid_id):
-   try: 
-    m = await m.edit(text = "📥 Downloading...",)
-    link =  YouTube(f"https://youtu.be/{vid_id}")
-    videolink = link.streams.get_highest_resolution()
-    video = videolink.download(output_path="downloads/")
-    m = await m.edit(text = "📤 Uploading...")
-    await message.reply_video(video, 
-    caption=CAPTION_TEXT.format(link.title, message.from_user.mention if message.from_user else "Anonymous Admin", "Youtube"))
-    await m.delete()
-    if os.path.exists(video):
-            os.remove(video)
-   except Exception as e:
-       await m.edit(f"`Terjadi kesalahan. ⚠️ \nAnda juga bisa mendapatkan bantuan dari @kynansupport.__\n\n{str(e)}`")
-       
-   except HTTPError as e:
-       if e.status_code == 429:
-           time.sleep(3)
-           return await downloadvideo(m, message, vid_id)
-       else:
-           raise e
+    try: 
+        m = await m.edit(text = "📥 Downloading...",)
+        link =  YouTube(f"https://youtu.be/{vid_id}")
+        videolink = link.streams.get_highest_resolution()
+        video = videolink.download(output_path="downloads/")
+        m = await m.edit(text = "📤 Uploading...")
+        await message.reply_video(video, 
+        caption=CAPTION_TEXT.format(link.title, message.from_user.mention if message.from_user else "Anonymous Admin", "Youtube"))
+        await m.delete()
+        if os.path.exists(video):
+                os.remove(video)
+    except Exception as e:
+        await m.edit(f"`Terjadi kesalahan. ⚠️ \nAnda juga bisa mendapatkan bantuan dari @kynansupport.__\n\n{str(e)}`")
+
+    except HTTPError as e:
+        if e.status_code != 429:
+            raise e
+        time.sleep(3)
+        return await downloadvideo(m, message, vid_id)
 
 
 @Ubot("song2", "")
@@ -156,8 +155,8 @@ async def sosmed(client: Client, message: Message):
 add_command_help(
     "youtube",
     [
-        [f"song <judul>", "Download Audio From YouTube."],
-        [f"vid atau video <judul>", "Download Video from YouTube."],
+        ["song <judul>", "Download Audio From YouTube."],
+        ["vid atau video <judul>", "Download Video from YouTube."],
     ],
 )
 
@@ -165,8 +164,8 @@ add_command_help(
     "sosmed",
     [
         [
-            f"sosmed/tt/ig <link>",
+            "sosmed/tt/ig <link>",
             "Untuk Mendownload Media Dari Facebook / Tiktok / Instagram / Twitter / YouTube.",
-        ],
+        ]
     ],
 )

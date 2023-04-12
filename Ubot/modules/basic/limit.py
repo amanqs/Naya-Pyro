@@ -30,9 +30,4 @@ async def spamban(client: Client, m: Message):
     status = await client.get_messages(chat_id="SpamBot", message_ids=spambot_msg)
     await m.edit_text(f"~ {status.text}")
 
-add_command_help(
-    "limit",
-    [
-        [f"limit", "Cek limit/batasan akun."],
-    ],
-)
+add_command_help("limit", [["limit", "Cek limit/batasan akun."]])

@@ -40,8 +40,5 @@ async def webshot(client, message):
         )
 
 add_command_help(
-    "webshot",
-    [
-        [f"ss <link>", "Untuk screenshot halaman web yang diberikan",],
-    ],
+    "webshot", [["ss <link>", "Untuk screenshot halaman web yang diberikan"]]
 )

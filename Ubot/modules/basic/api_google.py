@@ -63,7 +63,5 @@ async def api_google_image(c: Client, m: Message):
 
 
 add_command_help(
-    "google",[
-        [f"gimg <query>", "Membuat mencari gambar menggunakan Google."],
-    ],
+    "google", [["gimg <query>", "Membuat mencari gambar menggunakan Google."]]
 )

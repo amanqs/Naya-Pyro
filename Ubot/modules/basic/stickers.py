@@ -480,13 +480,19 @@ async def stick2png(client: Client, message: Message):
 add_command_help(
     "sticker",
     [
-        [f"kang `Balas` Gambar",
-            f"Balas kang menambahkan gambar/stiker ke pack stiker anda."],
-        [f"kang [emoji] `atau` double [emoji]",
-            "Menambahkan stiker dengan spesifik emoji.`"],
-        [f"packinfo `or` stickerinfo",
-            "Mengambil info stiker atau pack striker."],
-        [f"stickers <nama sticker>", "Untuk mencari pack stikernya."],
+        [
+            "kang `Balas` Gambar",
+            "Balas kang menambahkan gambar/stiker ke pack stiker anda.",
+        ],
+        [
+            "kang [emoji] `atau` double [emoji]",
+            "Menambahkan stiker dengan spesifik emoji.`",
+        ],
+        [
+            "packinfo `or` stickerinfo",
+            "Mengambil info stiker atau pack striker.",
+        ],
+        ["stickers <nama sticker>", "Untuk mencari pack stikernya."],
     ],
 )
 
@@ -494,16 +500,20 @@ add_command_help(
 add_command_help(
     "meme",
     [
-        [f"mmf Top Text ; Bottom Text",
-            "Balas ke stiker untuk membuat memify text stiker."],
-        [f"tiny [reply ke photo/sticker]",
-            "To Change the Sticker to be Small."],
-        [f"text <warna>/<r/g/b/w> <pesan> atau <balas ke pesan>",
-            "Merubah text jadi sticker."],
-        [f"twitt <balas ke pesan>",
-            "Mebuat stiker status twitter."],
-        [f"mms atau meme <teks>",
-            "Mebuat stiker random dengan text."],
+        [
+            "mmf Top Text ; Bottom Text",
+            "Balas ke stiker untuk membuat memify text stiker.",
+        ],
+        [
+            "tiny [reply ke photo/sticker]",
+            "To Change the Sticker to be Small.",
+        ],
+        [
+            "text <warna>/<r/g/b/w> <pesan> atau <balas ke pesan>",
+            "Merubah text jadi sticker.",
+        ],
+        ["twitt <balas ke pesan>", "Mebuat stiker status twitter."],
+        ["mms atau meme <teks>", "Mebuat stiker random dengan text."],
     ],
 )
 

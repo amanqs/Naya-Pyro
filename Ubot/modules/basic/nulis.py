@@ -28,6 +28,9 @@ async def handwrite(client, message):
 add_command_help(
     "nulis",
     [
-        [f"nulis [berikan pesan/balas ke pesan]", "Membuat Tulisan Untuk Kamu Yang Malas Nulis."],
+        [
+            "nulis [berikan pesan/balas ke pesan]",
+            "Membuat Tulisan Untuk Kamu Yang Malas Nulis.",
+        ]
     ],
 )
